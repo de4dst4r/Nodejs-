@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加成功</title>
+    <style>
+        .container {
+            font-size: 20px;
+            color: aqua;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            overflow: hidden;
+            transform: translate(-50%, -50%);
+            margin: 0;
+        }
+
+        h2:hover {
+            color: red;
+        }
+
+        .countdown {
+            width: 100px;
+            height: auto;
+            font-size: 24px;
+            color: gray;
+            position: absolute;
+            left: 50%;
+            top: 70%;
+            transform: translate(-50%, -50%);
+        }
+
+        .jmp {
+            position: fixed;
+            /* 固定定位 */
+            bottom: 0;
+            /* 位于页面底部 */
+            left: 50%;
+            /* 水平居中 */
+            transform: translateX(-50%);
+            /* 水平居中 */
+            z-index: 999;
+            /* 确保在最顶层 */
+            background-color: white;
+            /* 可选，根据需要设置背景色 */
+            padding: 10px;
+            /* 可选，根据需要设置内边距 */
+            border: 1px solid black;
+            /* 可选，根据需要设置边框 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>&lt3 <%= msg%>
+        </h2>
+        <hr>
+    </div>
+    <a href="<%= url%>" class="jmp">点击跳转到账单页面</a>
+    <div class="countdown">
+
+        <span class="countdown">跳转倒计时：<span id="countdown">3</span> 秒</span>
+    </div>
+    <script>
+        var url = "<%= url%>";
+        var countdownElement = document.getElementById('countdown');
+        var countdownValue = parseInt(countdownElement.innerText);
+
+        var countdownInterval = setInterval(function () {
+            countdownValue -= 1;
+            countdownElement.innerText = countdownValue;
+
+            if (countdownValue <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = url;
+            }
+        }, 1000);
+    </script>
+
+</body>
+
+</html>
